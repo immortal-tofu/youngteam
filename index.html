@@ -3,46 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <title>young team</title>
+  <!-- Google Fonts : Bebas Neue -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       background: #000;
-      color: #fff;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Bebas Neue', sans-serif;
       overflow: hidden;
     }
 
-    h1 {
-      font-size: 5rem;
-      font-weight: 800;
-      text-transform: lowercase;
-      background: linear-gradient(
-        120deg,
-        #bbb,
-        #fff,
-        #999,
-        #444,
-        #888,
-        #ccc
-      );
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: metallicGradient 8s ease infinite;
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 100% 3px;
+      pointer-events: none;
+      background-position: 0px 0px;
     }
 
-    @keyframes metallicGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    h1 {
+      font-size: 6rem;
+      font-weight: 400;
+      text-transform: lowercase;
+      color: white;
+      position: relative;
+      letter-spacing: 4px;
+      animation: jitter 4s infinite;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      text-transform: lowercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 1rem;
+      letter-spacing: 3px;
+    }
+
+    /* Effet glitch avec pseudo-elements */
+    h1::before,
+    h1::after {
+      content: "young team";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    h1::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation: glitchTop 2s infinite linear alternate-reverse;
+    }
+
+    h1::after {
+      left: 2px;
+      text-shadow: -2px 0 cyan;
+      animation: glitchBottom 2s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      5% { clip: rect(0, 9999px, 100px, 0); }
+      10% { clip: rect(0, 9999px, 50px, 0); }
+      15% { clip: rect(0, 9999px, 80px, 0); }
+      20% { clip: rect(0, 9999px, 0, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes glitchBottom {
+      0%, 40% { clip: rect(0, 9999px, 0, 0); }
+      41% { clip: rect(20px, 9999px, 80px, 0); }
+      42% { clip: rect(10px, 9999px, 90px, 0); }
+      43%, 100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes jitter {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(1px, -1px); }
     }
   </style>
 </head>
 <body>
   <h1>young team</h1>
+  <h2>this is home</h2>
 </body>
 </html>
