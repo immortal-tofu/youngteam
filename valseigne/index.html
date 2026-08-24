@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bienvenue à valseigne — young team</title>
+  <meta name="description" content="bienvenue à valseigne — an investigation by young team. a village of 412 souls you won't find on any map. write to them — they write back.">
+  <!-- Google Fonts : Bebas Neue -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- dieu vous gard, curious one. -->
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #fff;
+      --dim: rgba(255, 255, 255, 0.7);
+      --dimmer: rgba(255, 255, 255, 0.45);
+      --line: rgba(255, 255, 255, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: 'Bebas Neue', sans-serif;
+      color: var(--fg);
+    }
+
+    /* CRT scanlines over everything */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 100% 3px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .back {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: lowercase;
+      color: var(--dimmer);
+      text-decoration: none;
+      z-index: 5;
+    }
+
+    .back:hover { color: var(--fg); }
+
+    /* ---------- hero ---------- */
+
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 9vw, 5rem);
+      font-weight: 400;
+      text-transform: lowercase;
+      color: white;
+      position: relative;
+      letter-spacing: 4px;
+      animation: jitter 4s infinite;
+      margin: 0;
+    }
+
+    .hero h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      text-transform: lowercase;
+      color: var(--dim);
+      margin-top: 1rem;
+      letter-spacing: 3px;
+    }
+
+    /* glitch pseudo-elements */
+    h1::before,
+    h1::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    h1::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation: glitchTop 2s infinite linear alternate-reverse;
+    }
+
+    h1::after {
+      left: 2px;
+      text-shadow: -2px 0 cyan;
+      animation: glitchBottom 2s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      5% { clip: rect(0, 9999px, 100px, 0); }
+      10% { clip: rect(0, 9999px, 50px, 0); }
+      15% { clip: rect(0, 9999px, 80px, 0); }
+      20% { clip: rect(0, 9999px, 0, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes glitchBottom {
+      0%, 40% { clip: rect(0, 9999px, 0, 0); }
+      41% { clip: rect(20px, 9999px, 80px, 0); }
+      42% { clip: rect(10px, 9999px, 90px, 0); }
+      43%, 100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes jitter {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(1px, -1px); }
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    .badge {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--line);
+      color: var(--dim);
+    }
+
+    .badge.status {
+      color: var(--fg);
+      border-color: rgba(255, 255, 255, 0.4);
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.9; }
+    }
+
+    /* ---------- sections ---------- */
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .section-label {
+      font-size: 1rem;
+      letter-spacing: 4px;
+      color: var(--dimmer);
+      text-transform: lowercase;
+      margin: 0 0 2rem;
+    }
+
+    .section-label::before { content: "// "; }
+
+    section p {
+      font-size: 1.4rem;
+      letter-spacing: 1.5px;
+      line-height: 1.6;
+      text-transform: lowercase;
+      color: var(--dim);
+      margin: 0 0 1.5rem;
+    }
+
+    section p strong {
+      font-weight: 400;
+      color: var(--fg);
+    }
+
+    section a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--dim);
+      transition: border-color 0.3s;
+    }
+
+    section a:hover { border-color: var(--fg); }
+
+    .cta {
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 0.8rem 2rem;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      margin-top: 0.5rem;
+    }
+
+    .cta:hover {
+      border-color: var(--fg);
+      animation: jitter 0.4s infinite;
+    }
+
+    /* ---------- footer ---------- */
+
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    footer span, footer a {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      color: var(--dimmer);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="/">&larr; young team</a>
+
+  <header class="hero">
+    <h1 data-text="bienvenue à valseigne">bienvenue à valseigne</h1>
+    <h2>an investigation</h2>
+    <div class="hero-meta">
+      <span class="badge status">live — they're waiting for your letter</span>
+      <span class="badge">language: french</span>
+      <span class="badge">free</span>
+    </div>
+  </header>
+
+  <section>
+    <p class="section-label">the village</p>
+    <p>valseigne is a quiet village in the jura. <strong>412 inhabitants.</strong> a town hall, an inn, a bakery, a peat bog, and a municipal council of seven.</p>
+    <p>it is not on any map. it has no insee code. no road sign points to it. and yet — the town hall has a website, and <strong>the villagers answer their email.</strong></p>
+    <p>something happened there. nobody will tell you what.</p>
+  </section>
+
+  <section>
+    <p class="section-label">how it plays</p>
+    <p>this is an <strong>investigation played by email.</strong> no app, no account. you read the village's websites, you notice what doesn't add up, and you write to the people who live there. every villager has an address. every villager answers — in their own way.</p>
+    <p>some will help you. most will lie. ask the right person the right question, and pull the thread.</p>
+    <p>the villagers write in french. take your time — so do they.</p>
+  </section>
+
+  <section>
+    <p class="section-label">enter</p>
+    <p>start where everyone starts: the town hall.</p>
+    <p><a class="cta" href="https://www.valseigne.fr">visit valseigne</a></p>
+    <p style="margin-top: 2rem;">stuck? the war room is on <a href="https://discord.gg/MJvZ2rHR3p" target="_blank" rel="noopener">discord</a>.</p>
+  </section>
+
+  <footer>
+    <span>young team</span>
+    <a href="/">this is home</a>
+  </footer>
+
+</body>
+</html>

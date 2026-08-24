@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yuva — young team</title>
+  <meta name="description" content="yuva — a corporate thriller by young team, played solo. you're hired. probation period: a few weeks. welcome to yuva.">
+  <!-- Google Fonts : Bebas Neue -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- your curiosity has been noted. -->
+  <style>
+    :root {
+      --bg: #000;
+      --fg: #fff;
+      --dim: rgba(255, 255, 255, 0.7);
+      --dimmer: rgba(255, 255, 255, 0.45);
+      --line: rgba(255, 255, 255, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: 'Bebas Neue', sans-serif;
+      color: var(--fg);
+    }
+
+    /* CRT scanlines over everything */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 100% 3px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .back {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: lowercase;
+      color: var(--dimmer);
+      text-decoration: none;
+      z-index: 5;
+    }
+
+    .back:hover { color: var(--fg); }
+
+    /* ---------- hero ---------- */
+
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 400;
+      text-transform: lowercase;
+      color: white;
+      position: relative;
+      letter-spacing: 4px;
+      animation: jitter 4s infinite;
+      margin: 0;
+    }
+
+    .hero h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      text-transform: lowercase;
+      color: var(--dim);
+      margin-top: 1rem;
+      letter-spacing: 3px;
+    }
+
+    /* glitch pseudo-elements */
+    h1::before,
+    h1::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    h1::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation: glitchTop 2s infinite linear alternate-reverse;
+    }
+
+    h1::after {
+      left: 2px;
+      text-shadow: -2px 0 cyan;
+      animation: glitchBottom 2s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      5% { clip: rect(0, 9999px, 100px, 0); }
+      10% { clip: rect(0, 9999px, 50px, 0); }
+      15% { clip: rect(0, 9999px, 80px, 0); }
+      20% { clip: rect(0, 9999px, 0, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes glitchBottom {
+      0%, 40% { clip: rect(0, 9999px, 0, 0); }
+      41% { clip: rect(20px, 9999px, 80px, 0); }
+      42% { clip: rect(10px, 9999px, 90px, 0); }
+      43%, 100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes jitter {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(1px, -1px); }
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    .badge {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--line);
+      color: var(--dim);
+    }
+
+    .badge.status {
+      color: var(--fg);
+      border-color: rgba(255, 255, 255, 0.4);
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.9; }
+    }
+
+    /* ---------- sections ---------- */
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .section-label {
+      font-size: 1rem;
+      letter-spacing: 4px;
+      color: var(--dimmer);
+      text-transform: lowercase;
+      margin: 0 0 2rem;
+    }
+
+    .section-label::before { content: "// "; }
+
+    section p {
+      font-size: 1.4rem;
+      letter-spacing: 1.5px;
+      line-height: 1.6;
+      text-transform: lowercase;
+      color: var(--dim);
+      margin: 0 0 1.5rem;
+    }
+
+    section p strong {
+      font-weight: 400;
+      color: var(--fg);
+    }
+
+    section a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--dim);
+      transition: border-color 0.3s;
+    }
+
+    section a:hover { border-color: var(--fg); }
+
+    blockquote {
+      border-left: 1px solid rgba(255, 255, 255, 0.4);
+      margin: 2rem 0;
+      padding: 0.5rem 0 0.5rem 1.5rem;
+    }
+
+    blockquote p {
+      color: var(--fg);
+      margin: 0;
+    }
+
+    /* ---------- footer ---------- */
+
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    footer span, footer a {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      color: var(--dimmer);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="/">&larr; young team</a>
+
+  <header class="hero">
+    <h1 data-text="yuva">yuva</h1>
+    <h2>a corporate thriller, played solo</h2>
+    <div class="hero-meta">
+      <span class="badge status">incoming — recruitment opens soon</span>
+      <span class="badge">language: french &amp; english</span>
+      <span class="badge">free</span>
+    </div>
+  </header>
+
+  <section>
+    <p class="section-label">the job</p>
+    <p><strong>congratulations — your application caught our eye.</strong> yuva, the family app millions of households trust, is growing its care operations team. fully remote. no experience required. probation period: a few weeks.</p>
+    <blockquote>
+      <p>"keep the nest together."</p>
+    </blockquote>
+    <p>you'll help families find what they've lost, watch over the ones who wander, and keep the nest safe. at yuva, trust is the core value. if something ever seems off to you — report it.</p>
+  </section>
+
+  <section>
+    <p class="section-label">how it plays</p>
+    <p>a thriller played <strong>solo, from your inbox.</strong> you sign up with your real email, you get hired, and the story comes to you — credentials, colleagues, tasks. everyone lives their own version, start to finish, at their own pace.</p>
+    <p>no app to install. plays in <strong>french or english.</strong></p>
+  </section>
+
+  <section>
+    <p class="section-label">status</p>
+    <p>recruitment hasn't opened yet. positions will be limited.</p>
+    <p>want to hear about it first? the waiting room is on <a href="https://discord.gg/MJvZ2rHR3p" target="_blank" rel="noopener">discord</a>.</p>
+  </section>
+
+  <footer>
+    <span>young team</span>
+    <a href="/">this is home</a>
+  </footer>
+
+</body>
+</html>
